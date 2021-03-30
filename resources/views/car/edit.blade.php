@@ -11,19 +11,19 @@
                <div class="card-body">
                 <form method="POST" action="{{route('car.update',[$car])}}">
                     <div class="form-group">
-                        <label>Name</label>
+                        <label class="list-line__cars__maker">Name</label>
                         <input type="text" class="form-control" name="car_name" value="{{old('car_name',$car->name)}}">
                         <small class="form-text text-muted">Input cars model name</small>
                       </div>
 
                       <div class="form-group">
-                        <label>Plate</label>
+                        <label class="list-line__cars__maker">Plate</label>
                         <input type="text" class="form-control" name="car_plate" value="{{old('car_plate',$car->plate)}}">
                         <small class="form-text text-muted">Input cars plate</small>
                       </div>
 
                       <div class="form-group">
-                        <label>About</label>
+                        <label class="list-line__cars__maker">About</label>
                         <textarea name="car_about" id="summernote">{{$car->about}}</textarea>
                         <small class="form-text text-muted">Write about car</small>
                       </div>
@@ -36,7 +36,9 @@
                         @endforeach
                 </select>
                     @csrf
-                    <button type="submit">EDIT</button>
+                    <div class="list-line__buttons">
+                    <button type="submit" class="btn btn-info" >EDIT</button>
+                    </div>
                 </form>
                </div>
            </div>

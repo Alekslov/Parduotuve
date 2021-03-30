@@ -15,7 +15,7 @@
                         <small class="form-text text-muted">Add new makers name</small>
                     </div>
                     @csrf
-                    <button type="submit">ADD</button>
+                    <button type="submit" class="btn btn-info">ADD</button>
                  </form>
                </div>
            </div>

@@ -10942,4 +10942,32 @@ a.text-dark:focus {
   }
 }
 
+.list-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-line__buttons {
+  display: flex;
+  float: right;
+}
+
+.list-line__buttons > * {
+  margin: 5px;
+}
+
+.list-line__cars {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-line__cars__maker {
+  font-weight: bold;
+}
+
+.list-line__cars__name {
+  font-weight: 100;
+}
+
 

@@ -1,0 +1,22 @@
+.list-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__buttons {
+        display: flex;
+        float:right;
+        &>* {
+            margin: 5px;
+        }
+    }
+    &__cars {
+            display: flex;
+            flex-direction: column;
+            &__maker {
+                font-weight: bold;
+            }
+            &__name {
+                font-weight:100;
+            }
+        }
+    }

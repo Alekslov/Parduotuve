@@ -12,14 +12,25 @@
                 </div>
 
                <div class="card-body">
+                <ul class="list-group">
                 @foreach ($cars as $car)
-                <a href="{{route('car.edit',[$car])}}">{{$car->name}} {{$car->carMaker->name}}</a>
+                <li class="list-group-item list-line">
+                 <div class="list-line__cars__maker">
+                {{$car->carMaker->name}}
+                <div class="list-line__cars__name">
+                    {{$car->name}} 
+                    </div>
+                </div>
+                    <div class="list-line__buttons">
+                <a href="{{route('car.edit',[$car])}}" class="btn btn-info">EDIT</a>
                 <form method="POST" action="{{route('car.destroy', [$car])}}">
                  @csrf
-                 <button type="submit">DELETE</button>
+                 <button type="submit" class="btn btn-danger">DELETE</button>
                 </form>
-                <br>
+            </div>
+            </li>
               @endforeach
+            </ul>
                </div>
            </div>
        </div>
