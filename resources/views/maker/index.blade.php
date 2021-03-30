@@ -5,7 +5,11 @@
    <div class="row justify-content-center">
        <div class="col-md-8">
            <div class="card">
-               <div class="card-header">List of makers</div>
+               <div class="card-header"> 
+                 <h2>List of makers</h2>
+                <a href="{{route('maker.index', ['sort' => 'name'])}}"> Sort by name </a>
+                <a href="{{route('maker.index')}}"> Default </a>
+                </div>
 
                <div class="card-body">
                 @foreach ($makers as $maker)

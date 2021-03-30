@@ -14,15 +14,21 @@ class MakerController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $makers = Maker::all();
+        // $makers = Maker::all();
+        if ('name' == $request->sort) {
+            $makers = Maker::orderBy('name')->get();
+        }
+        else {
+            $makers = Maker::all();
+        }
         return view('maker.index', ['makers' => $makers]);
 
     }
@@ -55,7 +61,7 @@ class MakerController extends Controller
             ],
         
         [
-        'maker_name.min' => 'per trumpas pavadinimas'
+        'maker_name.min' => 'Too short or too long name(3-64)'
         ]
         
             );
@@ -67,7 +73,7 @@ class MakerController extends Controller
             $maker = new Maker;
         $maker->name = $request->maker_name;
         $maker->save();
-        return redirect()->route('maker.index')->with('success_message', 'Sekmingai įrašytas.');
+        return redirect()->route('maker.index')->with('success_message', 'Maker was edited');
      
     }
 
@@ -109,7 +115,7 @@ class MakerController extends Controller
         ],
     
     [
-    'maker_name.min' => 'per trumpas pavadinimas'
+    'maker_name.min' => 'Too short or too long name(3-64)'
     ]
     
         );
@@ -120,7 +126,7 @@ class MakerController extends Controller
 
         $maker->name = $request->maker_name;
         $maker->save();
-        return redirect()->route('maker.index')->with('success_message', 'Sėkmingai pakeistas.');
+        return redirect()->route('maker.index')->with('success_message', 'Maker was edited');
     }
 
     /**
@@ -132,10 +138,10 @@ class MakerController extends Controller
     public function destroy(Maker $maker)
     {
         if($maker->makerCars->count()){
-            return redirect()->route('car.index')->with('info_message', 'Trinti negalima, nes turi modeliu.');
+            return redirect()->route('car.index')->with('info_message', "Can't be deleted, because have a model");
         }
         $maker->delete();
-        return redirect()->route('car.index')->with('success_message', 'Sekmingai ištrintas.');
+        return redirect()->route('car.index')->with('success_message', 'Maker was deleted');
        
     }
 }

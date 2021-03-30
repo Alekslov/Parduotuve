@@ -14,15 +14,24 @@ class CarController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::all();
+        // $cars = Car::all();
+        if ('name' == $request->sort) {
+            $cars = Car::orderBy('name')->get();
+        }
+        elseif ('plate' == $request->sort){
+            $cars = Car::orderBy('plate')->get();
+        }
+        else {
+            $cars = Car::all();
+        }
        return view('car.index', ['cars' => $cars]);
     }
 
@@ -51,8 +60,8 @@ class CarController extends Controller
             'car_plate' => ['required', 'min:6', 'max:6'],
         ],
         [
-        'car_name.min' => 'vardas turi buti nuo 3 iki 64 simboliu',
-        'car_plate.min' => 'masinos valstybinis numeris turi buti 6 simboliu',
+        'car_name.min' => 'Name too short or too long (3-64)',
+        'car_plate.min' => 'Plate number should include 6 simbols',
 
         ]
         );
@@ -68,7 +77,7 @@ class CarController extends Controller
         $car->about = $request->car_about;
         $car->maker_id = $request->maker_id;
         $car->save();
-        return redirect()->route('car.index')->with('success_message', 'Sekmingai įrašytas.');
+        return redirect()->route('car.index')->with('success_message', 'New cars model was added');
  
     }
 
@@ -111,8 +120,8 @@ class CarController extends Controller
             'car_plate' => ['required', 'min:6', 'max:6'],
         ],
         [
-        'car_name.min' => 'vardas turi buti nuo 3 iki 64 simboliu',
-        'car_plate.min' => 'masinos valstybinis numeris turi buti 6 simboliu',
+        'car_name.min' => 'Name too short or too long (3-64)',
+        'car_plate.min' => 'Plate number should include 6 simbols',
 
         ]
         );
@@ -126,7 +135,7 @@ class CarController extends Controller
        $car->about = $request->car_about;
        $car->maker_id = $request->maker_id;
        $car->save();
-       return redirect()->route('car.index')->with('success_message', 'Sėkmingai pakeistas.');
+       return redirect()->route('car.index')->with('success_message', 'Cars model was edited');
 
     }
 
@@ -139,6 +148,6 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         $car->delete();
-        return redirect()->route('car.index')->with('success_message', 'Sekmingai ištrintas.');
+        return redirect()->route('car.index')->with('success_message', 'Cars model was deleted');
     }
 }
